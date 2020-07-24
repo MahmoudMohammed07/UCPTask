@@ -1,6 +1,6 @@
 package com.android.ucptask.data
 
-import com.android.ucptask.data.response.CurrentWeatherResponse
+import com.android.ucptask.data.db.entity.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor

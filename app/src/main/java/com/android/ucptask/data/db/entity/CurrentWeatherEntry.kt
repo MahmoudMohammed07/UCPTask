@@ -1,9 +1,9 @@
-package com.android.ucptask.data.response
+package com.android.ucptask.data.db.entity
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Main(
+data class CurrentWeatherEntry(
     @SerializedName("feels_like")
     val feelsLike: Double,
     val humidity: Int,
