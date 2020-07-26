@@ -1,6 +1,7 @@
 package com.android.ucptask.data.db.unitlocalized
 
 import androidx.room.ColumnInfo
+import com.android.ucptask.data.db.entity.Weather
 
 data class SpecificCurrentWeatherEntryImpl(
     @ColumnInfo(name = "date")
@@ -21,10 +22,9 @@ data class SpecificCurrentWeatherEntryImpl(
     override val cityName: String,
     @ColumnInfo(name = "visibility")
     override val visibility: Int,
-    @ColumnInfo(name = "weather_description")
-    override val weatherDescription: String,
-    @ColumnInfo(name = "weather_icon")
-    override val weatherIcon: String,
+    override val weather: List<Weather>,
     @ColumnInfo(name = "wind_speed")
-    override val windSpeed: Double
+    override val windSpeed: Double,
+    @ColumnInfo(name = "timezoneId")
+    override val timezoneId: String
 ) : SpecificCurrentWeatherEntry

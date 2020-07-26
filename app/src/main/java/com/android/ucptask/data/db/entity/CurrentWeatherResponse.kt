@@ -22,13 +22,12 @@ data class CurrentWeatherResponse(
     val currentWeatherEntry: CurrentWeatherEntry,
     val name: String,
     val visibility: Int,
-    @Embedded(prefix = "weather_")
     val weather: List<Weather>,
     @Embedded(prefix = "wind_")
     val wind: Wind
 ) {
     @PrimaryKey(autoGenerate = false)
-    var id: Int = CURRENT_WEATHER_ID
+    var KEY_ID: Int = CURRENT_WEATHER_ID
 
     val zonedDateTime: ZonedDateTime
         get() {
