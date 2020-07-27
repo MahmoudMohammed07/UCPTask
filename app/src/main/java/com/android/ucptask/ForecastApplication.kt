@@ -1,8 +1,11 @@
 package com.android.ucptask
 
 import android.app.Application
+import androidx.preference.PreferenceManager
 import com.android.ucptask.data.db.ForecastDatabase
 import com.android.ucptask.data.network.*
+import com.android.ucptask.data.provider.UnitProvider
+import com.android.ucptask.data.provider.UnitProviderImpl
 import com.android.ucptask.data.repository.ForecastRepository
 import com.android.ucptask.data.repository.ForecastRepositoryImpl
 import com.android.ucptask.ui.weather.current.CurrentWeatherViewModelFactory
@@ -24,12 +27,20 @@ class ForecastApplication : Application(), KodeinAware {
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { WeatherApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-        bind() from provider { CurrentWeatherViewModelFactory(instance()) }
+        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+        bind<ForecastRepository>() with singleton {
+            ForecastRepositoryImpl(
+                instance(),
+                instance(),
+                instance()
+            )
+        }
+        bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
     }
 
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
     }
 }

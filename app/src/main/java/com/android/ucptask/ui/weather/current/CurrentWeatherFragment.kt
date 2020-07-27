@@ -68,6 +68,10 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
         })
     }
 
+    private fun chooseLocalizedUnitAbbreviation(metric: String, imperial: String): String {
+        return if (viewModel.isMetric) metric else imperial
+    }
+
     private fun updateLocation(location: String) {
         (activity as? AppCompatActivity)?.supportActionBar?.title = location
     }
@@ -77,8 +81,9 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updateTemperature(temperature: Double, feelsLike: Double) {
-        textView_temperature.text = "$temperature°C"
-        textView_feels_like_temperature.text = "Feels like $feelsLike°C"
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("°C", "°F")
+        textView_temperature.text = "$temperature$unitAbbreviation"
+        textView_feels_like_temperature.text = "Feels like $feelsLike$unitAbbreviation"
     }
 
     private fun updateCondition(condition: String) {
@@ -90,7 +95,8 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updateWind(windSpeed: Double) {
-        textView_wind.text = "Wind Speed: $windSpeed"
+        val unitAbbreviation = chooseLocalizedUnitAbbreviation("kph", "mph")
+        textView_wind.text = "Wind Speed: $windSpeed$unitAbbreviation"
     }
 
     private fun updateVisibility(visibilityDistance: Int) {

@@ -5,6 +5,7 @@ import com.android.ucptask.data.db.CurrentWeatherDao
 import com.android.ucptask.data.db.entity.CurrentWeatherResponse
 import com.android.ucptask.data.db.unitlocalized.SpecificCurrentWeatherEntry
 import com.android.ucptask.data.network.WeatherNetworkDataSource
+import com.android.ucptask.data.provider.UnitProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,7 +14,8 @@ import org.threeten.bp.ZonedDateTime
 
 class ForecastRepositoryImpl(
     private val currentWeatherDao: CurrentWeatherDao,
-    private val weatherNetworkDataSource: WeatherNetworkDataSource
+    private val weatherNetworkDataSource: WeatherNetworkDataSource,
+    private val unitProvider: UnitProvider
 ) : ForecastRepository {
 
     init {
@@ -40,8 +42,8 @@ class ForecastRepositoryImpl(
             fetchCurrentWeather()
     }
 
-    private suspend fun fetchCurrentWeather(){
-        weatherNetworkDataSource.fetchCurrentWeather("Cairo","metric")
+    private suspend fun fetchCurrentWeather() {
+        weatherNetworkDataSource.fetchCurrentWeather("Cairo", unitProvider.getSystemUnit())
     }
 
     private fun isFetchCurrentNeeded(lastFetchTime: ZonedDateTime): Boolean {
