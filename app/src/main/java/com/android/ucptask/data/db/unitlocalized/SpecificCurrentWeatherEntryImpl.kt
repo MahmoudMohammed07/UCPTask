@@ -2,10 +2,13 @@ package com.android.ucptask.data.db.unitlocalized
 
 import androidx.room.ColumnInfo
 import com.android.ucptask.data.db.entity.Weather
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
+import org.threeten.bp.ZonedDateTime
 
 data class SpecificCurrentWeatherEntryImpl(
     @ColumnInfo(name = "date")
-    override val date: Int,
+    override val date: Long,
     @ColumnInfo(name = "currentWeatherEntry_feelsLike")
     override val feelsLikeTemperature: Double,
     @ColumnInfo(name = "currentWeatherEntry_humidity")
@@ -26,5 +29,16 @@ data class SpecificCurrentWeatherEntryImpl(
     @ColumnInfo(name = "wind_speed")
     override val windSpeed: Double,
     @ColumnInfo(name = "timezoneId")
-    override val timezoneId: String
-) : SpecificCurrentWeatherEntry
+    override val timezoneId: String,
+    @ColumnInfo(name = "coord_lat")
+    override val latitude: Double,
+    @ColumnInfo(name = "coord_lon")
+    override val longitude: Double
+) : SpecificCurrentWeatherEntry {
+    override val zonedDateTime: ZonedDateTime
+        get() {
+            val instant = Instant.ofEpochSecond(date)
+            val zoneId = ZoneId.of(timezoneId)
+            return ZonedDateTime.ofInstant(instant, zoneId)
+        }
+}

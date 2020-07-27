@@ -24,15 +24,11 @@ data class CurrentWeatherResponse(
     val visibility: Int,
     val weather: List<Weather>,
     @Embedded(prefix = "wind_")
-    val wind: Wind
+    val wind: Wind,
+    @Embedded(prefix = "coord_")
+    val coord: Coordinates
 ) {
     @PrimaryKey(autoGenerate = false)
     var KEY_ID: Int = CURRENT_WEATHER_ID
 
-    val zonedDateTime: ZonedDateTime
-        get() {
-            val instant = Instant.ofEpochSecond(date)
-            val zoneId = ZoneId.of(timezoneId)
-            return ZonedDateTime.ofInstant(instant, zoneId)
-        }
 }

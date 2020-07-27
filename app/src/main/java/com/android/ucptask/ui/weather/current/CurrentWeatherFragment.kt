@@ -53,7 +53,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
             if (it == null) return@Observer
 
             group_loading.visibility = View.GONE
-            updateLocation("Cairo")
+            updateLocation(it.cityName)
             updateDateToToday()
             updateTemperature(it.temperature,it.feelsLikeTemperature)
             updateCondition(it.weather[0].description)
