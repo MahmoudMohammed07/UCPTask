@@ -19,6 +19,5 @@
         tools:layout="@layout/future_detail_weather_fragment" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.android.ucptask.ui.settings.SettingsFragment"
-        android:label="Settings" />
+        android:name="com.android.ucptask.ui.settings.SettingsFragment" />
 </navigation>

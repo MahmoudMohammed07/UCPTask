@@ -8,7 +8,7 @@ interface SpecificCurrentWeatherEntry {
     val feelsLikeTemperature: Double
     val humidity: Int
     val pressure: Int
-    val temperature: Int
+    val temperature: Double
     val tempMax: Int
     val tempMin: Int
     val cityName: String

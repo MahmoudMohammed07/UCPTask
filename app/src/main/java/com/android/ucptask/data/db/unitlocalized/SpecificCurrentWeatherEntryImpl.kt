@@ -13,7 +13,7 @@ data class SpecificCurrentWeatherEntryImpl(
     @ColumnInfo(name = "currentWeatherEntry_pressure")
     override val pressure: Int,
     @ColumnInfo(name = "currentWeatherEntry_temp")
-    override val temperature: Int,
+    override val temperature: Double,
     @ColumnInfo(name = "currentWeatherEntry_tempMax")
     override val tempMax: Int,
     @ColumnInfo(name = "currentWeatherEntry_tempMin")
