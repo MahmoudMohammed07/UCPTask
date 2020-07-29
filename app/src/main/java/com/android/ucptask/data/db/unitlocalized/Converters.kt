@@ -1,7 +1,7 @@
 package com.android.ucptask.data.db.unitlocalized
 
 import androidx.room.TypeConverter
-import com.android.ucptask.data.db.entity.Weather
+import com.android.ucptask.data.db.entity.current.Weather
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

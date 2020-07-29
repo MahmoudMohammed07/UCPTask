@@ -8,7 +8,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import androidx.core.content.ContextCompat
-import com.android.ucptask.data.db.unitlocalized.SpecificCurrentWeatherEntry
+import com.android.ucptask.data.db.unitlocalized.current.SpecificCurrentWeatherEntry
 import com.android.ucptask.util.LocationPermissionNotGrantedException
 import com.android.ucptask.util.asDeferred
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -66,8 +66,11 @@ class LocationProviderImpl(
     }
 
     private fun hasCustomLocationChanged(lastWeatherLocation: SpecificCurrentWeatherEntry): Boolean {
-        val customLocationName = getCustomLocationName()
-        return customLocationName != lastWeatherLocation.cityName
+        if (!isUsingDeviceLocation()) {
+            val customLocationName = getCustomLocationName()
+            return customLocationName != lastWeatherLocation.cityName
+        }
+        return false
     }
 
     private fun getCustomLocationName(): String? {

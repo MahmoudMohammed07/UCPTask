@@ -1,7 +1,7 @@
-package com.android.ucptask.data.db.unitlocalized
+package com.android.ucptask.data.db.unitlocalized.current
 
 import androidx.room.ColumnInfo
-import com.android.ucptask.data.db.entity.Weather
+import com.android.ucptask.data.db.entity.current.Weather
 import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime

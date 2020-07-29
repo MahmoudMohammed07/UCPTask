@@ -1,4 +1,4 @@
-package com.android.ucptask.data.db.entity
+package com.android.ucptask.data.db.entity.current
 
 data class Coordinates(
     val lat: Double,

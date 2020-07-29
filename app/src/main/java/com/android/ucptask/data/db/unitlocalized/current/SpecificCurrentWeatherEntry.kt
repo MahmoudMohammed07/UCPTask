@@ -1,6 +1,6 @@
-package com.android.ucptask.data.db.unitlocalized
+package com.android.ucptask.data.db.unitlocalized.current
 
-import com.android.ucptask.data.db.entity.Weather
+import com.android.ucptask.data.db.entity.current.Weather
 import org.threeten.bp.ZonedDateTime
 
 interface SpecificCurrentWeatherEntry {

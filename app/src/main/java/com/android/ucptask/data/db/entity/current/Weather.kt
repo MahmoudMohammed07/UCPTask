@@ -1,4 +1,4 @@
-package com.android.ucptask.data.db.entity
+package com.android.ucptask.data.db.entity.current
 
 import androidx.room.ColumnInfo
 

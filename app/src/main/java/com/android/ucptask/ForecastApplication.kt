@@ -12,6 +12,7 @@ import com.android.ucptask.data.provider.UnitProviderImpl
 import com.android.ucptask.data.repository.ForecastRepository
 import com.android.ucptask.data.repository.ForecastRepositoryImpl
 import com.android.ucptask.ui.weather.current.CurrentWeatherViewModelFactory
+import com.android.ucptask.ui.weather.future.list.FutureListWeatherViewModelFactory
 import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
@@ -28,6 +29,7 @@ class ForecastApplication : Application(), KodeinAware {
 
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }
+        bind() from singleton { instance<ForecastDatabase>().futureWeatherDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { WeatherApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
@@ -39,10 +41,12 @@ class ForecastApplication : Application(), KodeinAware {
                 instance(),
                 instance(),
                 instance(),
+                instance(),
                 instance()
             )
         }
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
+        bind() from provider { FutureListWeatherViewModelFactory(instance()) }
     }
 
     override fun onCreate() {

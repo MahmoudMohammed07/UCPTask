@@ -1,24 +1,16 @@
 package com.android.ucptask.ui.weather.current
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.android.ucptask.R
-import com.android.ucptask.data.db.entity.Weather
-import com.android.ucptask.data.network.ConnectivityInterceptorImpl
-import com.android.ucptask.data.network.WeatherApiService
-import com.android.ucptask.data.network.WeatherNetworkDataSourceImpl
 import com.android.ucptask.ui.base.ScopedFragment
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.current_weather_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
