@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.ucptask.R
-import com.android.ucptask.data.db.unitlocalized.future.SpecificSimpleFutureWeatherEntry
+import com.android.ucptask.data.db.unitlocalized.future.list.SpecificSimpleFutureWeatherEntry
 import com.android.ucptask.ui.base.ScopedFragment
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
@@ -79,9 +79,15 @@ class FutureListWeatherFragment : ScopedFragment(), KodeinAware {
         }
 
         groupAdapter.setOnItemClickListener { item, view ->
-            Toast.makeText(this@FutureListWeatherFragment.context, "Clicked", Toast.LENGTH_SHORT)
-                .show()
+            (item as? FutureWeatherItem)?.let {
+                showWeatherDetail(it.weatherEntry.date, view)
+            }
         }
+    }
+
+    private fun showWeatherDetail(date: Long, view: View) {
+        val actionDetail = FutureListWeatherFragmentDirections.actionDetail(date)
+        Navigation.findNavController(view).navigate(actionDetail)
     }
 
     private fun List<SpecificSimpleFutureWeatherEntry>.toFutureWeatherItems(): List<FutureWeatherItem> {

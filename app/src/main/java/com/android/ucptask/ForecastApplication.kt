@@ -12,16 +12,14 @@ import com.android.ucptask.data.provider.UnitProviderImpl
 import com.android.ucptask.data.repository.ForecastRepository
 import com.android.ucptask.data.repository.ForecastRepositoryImpl
 import com.android.ucptask.ui.weather.current.CurrentWeatherViewModelFactory
+import com.android.ucptask.ui.weather.future.detail.FutureDetailWeatherViewModelFactory
 import com.android.ucptask.ui.weather.future.list.FutureListWeatherViewModelFactory
 import com.google.android.gms.location.LocationServices
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.kodein.di.generic.*
 
 class ForecastApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
@@ -35,7 +33,7 @@ class ForecastApplication : Application(), KodeinAware {
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
         bind() from provider { LocationServices.getFusedLocationProviderClient(instance<Context>()) }
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
-        bind<LocationProvider>() with singleton { LocationProviderImpl(instance(),instance()) }
+        bind<LocationProvider>() with singleton { LocationProviderImpl(instance(), instance()) }
         bind<ForecastRepository>() with singleton {
             ForecastRepositoryImpl(
                 instance(),
@@ -47,6 +45,13 @@ class ForecastApplication : Application(), KodeinAware {
         }
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
         bind() from provider { FutureListWeatherViewModelFactory(instance()) }
+        bind() from factory { date: Long ->
+            FutureDetailWeatherViewModelFactory(
+                instance(),
+                date,
+                instance()
+            )
+        }
     }
 
     override fun onCreate() {

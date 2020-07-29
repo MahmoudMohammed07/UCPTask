@@ -6,7 +6,8 @@ import com.android.ucptask.data.db.FutureWeatherDao
 import com.android.ucptask.data.db.entity.CurrentWeatherResponse
 import com.android.ucptask.data.db.entity.FutureWeatherResponse
 import com.android.ucptask.data.db.unitlocalized.current.SpecificCurrentWeatherEntry
-import com.android.ucptask.data.db.unitlocalized.future.SpecificSimpleFutureWeatherEntry
+import com.android.ucptask.data.db.unitlocalized.future.detail.SpecificDetailFutureWeatherEntry
+import com.android.ucptask.data.db.unitlocalized.future.list.SpecificSimpleFutureWeatherEntry
 import com.android.ucptask.data.network.WeatherNetworkDataSource
 import com.android.ucptask.data.provider.LocationProvider
 import com.android.ucptask.data.provider.UnitProvider
@@ -46,6 +47,12 @@ class ForecastRepositoryImpl(
         return withContext(Dispatchers.IO) {
             initWeatherData()
             return@withContext futureWeatherDao.getSimpleWeatherForecast(startDate)
+        }
+    }
+
+    override suspend fun getFutureWeatherByDate(date: Long): LiveData<out SpecificDetailFutureWeatherEntry> {
+        return withContext(Dispatchers.IO) {
+            return@withContext futureWeatherDao.getDetailWeatherForecast(date)
         }
     }
 

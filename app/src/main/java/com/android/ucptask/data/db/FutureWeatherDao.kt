@@ -6,7 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.android.ucptask.data.db.entity.future.DailyForecast
-import com.android.ucptask.data.db.unitlocalized.future.SpecificSimpleFutureWeatherEntryImpl
+import com.android.ucptask.data.db.unitlocalized.future.detail.SpecificDetailFutureWeatherEntryImpl
+import com.android.ucptask.data.db.unitlocalized.future.list.SpecificSimpleFutureWeatherEntryImpl
 
 @Dao
 interface FutureWeatherDao {
@@ -15,6 +16,9 @@ interface FutureWeatherDao {
 
     @Query("SELECT * FROM future_weather WHERE date(date) >= date(:startDate)")
     fun getSimpleWeatherForecast(startDate: Long): LiveData<List<SpecificSimpleFutureWeatherEntryImpl>>
+
+    @Query("SELECT * FROM future_weather WHERE date(date) = date(:date)")
+    fun getDetailWeatherForecast(date: Long): LiveData<SpecificDetailFutureWeatherEntryImpl>
 
     @Query("SELECT count(id) FROM future_weather WHERE date(date) >= date(:startDate)")
     fun countFutureWeather(startDate: Long): Int

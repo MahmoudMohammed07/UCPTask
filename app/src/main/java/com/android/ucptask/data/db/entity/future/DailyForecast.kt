@@ -15,5 +15,10 @@ data class DailyForecast(
     val date: Long,
     @Embedded(prefix = "temp_")
     val temp: Temp,
-    val weather: List<Weather>
+    val weather: List<Weather>,
+    val humidity: Int,
+    val pressure: Int,
+    @SerializedName("wind_speed")
+    val windSpeed: Double,
+    val uvi: Double
 )

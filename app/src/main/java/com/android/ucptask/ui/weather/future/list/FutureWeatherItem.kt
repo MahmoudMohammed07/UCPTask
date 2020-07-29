@@ -2,7 +2,7 @@ package com.android.ucptask.ui.weather.future.list
 
 import android.content.Context
 import com.android.ucptask.R
-import com.android.ucptask.data.db.unitlocalized.future.SpecificSimpleFutureWeatherEntry
+import com.android.ucptask.data.db.unitlocalized.future.list.SpecificSimpleFutureWeatherEntry
 import com.android.ucptask.data.provider.UnitProviderImpl
 import com.bumptech.glide.Glide
 import com.xwray.groupie.kotlinandroidextensions.Item
