@@ -12,7 +12,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 const val API_KEY = "6400a07d3014a23d1de7bc70643728e9"
-const val BASE_URL = "http://api.openweathermap.org/"
+const val BASE_URL = "https://api.openweathermap.org/"
 
 interface WeatherApiService {
     //http://api.openweathermap.org/data/2.5/weather?q=Cairo&units=metric&APPID=<apikey>

@@ -43,7 +43,7 @@ class FutureWeatherItem(
     private fun ViewHolder.updateConditionImage() {
         val iconId = weatherEntry.weather[0].icon
         Glide.with(this.containerView)
-            .load("http://openweathermap.org/img/wn/${iconId}@2x.png")
+            .load("https://openweathermap.org/img/wn/${iconId}@2x.png")
             .into(imageView_condition_icon)
     }
 }

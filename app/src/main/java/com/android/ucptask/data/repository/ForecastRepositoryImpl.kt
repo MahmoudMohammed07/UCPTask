@@ -45,7 +45,7 @@ class ForecastRepositoryImpl(
 
     override suspend fun getFutureWeatherList(startDate: Long): LiveData<out List<SpecificSimpleFutureWeatherEntry>> {
         return withContext(Dispatchers.IO) {
-            initWeatherData()
+            initFutureWeatherData()
             return@withContext futureWeatherDao.getSimpleWeatherForecast(startDate)
         }
     }
@@ -80,16 +80,28 @@ class ForecastRepositoryImpl(
         if (lastWeatherLocation == null ||
             locationProvider.hasLocationChanged(lastWeatherLocation)
         ) {
-            GlobalScope.launch(Dispatchers.IO) {
-                fetchCurrentWeather()
-                delay(1000)
-                fetchFutureWeather()
-            }
+
+            fetchCurrentWeather()
+
             return
         }
 
         if (isFetchCurrentNeeded(lastWeatherLocation.zonedDateTime))
             fetchCurrentWeather()
+
+    }
+
+    private suspend fun initFutureWeatherData() {
+        val lastWeatherLocation = currentWeatherDao.getCurrentWeather().value
+
+        if (lastWeatherLocation == null ||
+            locationProvider.hasLocationChanged(lastWeatherLocation)
+        ) {
+
+            fetchFutureWeather()
+
+            return
+        }
 
         if (isFetchFutureNeeded())
             fetchFutureWeather()

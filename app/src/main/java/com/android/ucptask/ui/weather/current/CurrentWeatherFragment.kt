@@ -55,7 +55,7 @@ class CurrentWeatherFragment : ScopedFragment(), KodeinAware {
 
             val iconId = it.weather[0].icon
             Glide.with(this@CurrentWeatherFragment)
-                .load("http://openweathermap.org/img/wn/${iconId}@2x.png")
+                .load("https://openweathermap.org/img/wn/${iconId}@2x.png")
                 .into(imageView_condition_icon)
         })
     }
